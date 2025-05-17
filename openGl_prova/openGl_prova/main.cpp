@@ -35,44 +35,32 @@ int main() {
         -5.0f, -5.0f, -5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 0.0f,    0.0f,  0.0f, -1.0f,
          5.0f, -5.0f, -5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 0.0f,    0.0f,  0.0f, -1.0f,
          5.0f,  5.0f, -5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 1.0f,    0.0f,  0.0f, -1.0f,
-         5.0f,  5.0f, -5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 1.0f,    0.0f,  0.0f, -1.0f,
         -5.0f,  5.0f, -5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 1.0f,    0.0f,  0.0f, -1.0f,
-        -5.0f, -5.0f, -5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 0.0f,    0.0f,  0.0f, -1.0f,
 
         -5.0f, -5.0f,  5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 0.0f,    0.0f,  0.0f,  1.0f,
          5.0f, -5.0f,  5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 0.0f,    0.0f,  0.0f,  1.0f,
          5.0f,  5.0f,  5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 1.0f,    0.0f,  0.0f,  1.0f,
-         5.0f,  5.0f,  5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 1.0f,    0.0f,  0.0f,  1.0f,
         -5.0f,  5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 1.0f,    0.0f,  0.0f,  1.0f,
-        -5.0f, -5.0f,  5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 0.0f,    0.0f,  0.0f,  1.0f,
 
         -5.0f,  5.0f,  5.0f,  1.0f, 0.0f, 0.0f,     1.0f, 0.0f,   -1.0f,  0.0f,  0.0f,
         -5.0f,  5.0f, -5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 1.0f,   -1.0f,  0.0f,  0.0f,
         -5.0f, -5.0f, -5.0f,  0.0f, 0.0f, 1.0f,     0.0f, 1.0f,   -1.0f,  0.0f,  0.0f,
-        -5.0f, -5.0f, -5.0f,  0.0f, 0.0f, 1.0f,     0.0f, 1.0f,   -1.0f,  0.0f,  0.0f,
         -5.0f, -5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 0.0f,   -1.0f,  0.0f,  0.0f,
-        -5.0f,  5.0f,  5.0f,  1.0f, 0.0f, 0.0f,     1.0f, 0.0f,   -1.0f,  0.0f,  0.0f,
 
          5.0f,  5.0f,  5.0f,  1.0f, 0.0f, 0.0f,     1.0f, 0.0f,    1.0f,  0.0f,  0.0f,
          5.0f,  5.0f, -5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 1.0f,    1.0f,  0.0f,  0.0f,
          5.0f, -5.0f, -5.0f,  0.0f, 0.0f, 1.0f,     0.0f, 1.0f,    1.0f,  0.0f,  0.0f,
-         5.0f, -5.0f, -5.0f,  0.0f, 0.0f, 1.0f,     0.0f, 1.0f,    1.0f,  0.0f,  0.0f,
          5.0f, -5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 0.0f,    1.0f,  0.0f,  0.0f,
-         5.0f,  5.0f,  5.0f,  1.0f, 0.0f, 0.0f,     1.0f, 0.0f,    1.0f,  0.0f,  0.0f,
 
         -5.0f, -5.0f, -5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 1.0f,    0.0f, -1.0f,  0.0f,
          5.0f, -5.0f, -5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 1.0f,    0.0f, -1.0f,  0.0f,
          5.0f, -5.0f,  5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 0.0f,    0.0f, -1.0f,  0.0f,
-         5.0f, -5.0f,  5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 0.0f,    0.0f, -1.0f,  0.0f,
         -5.0f, -5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 0.0f,    0.0f, -1.0f,  0.0f,
-        -5.0f, -5.0f, -5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 1.0f,    0.0f, -1.0f,  0.0f,
 
         -5.0f,  5.0f, -5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 1.0f,    0.0f,  1.0f,  0.0f,
          5.0f,  5.0f, -5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 1.0f,    0.0f,  1.0f,  0.0f,
          5.0f,  5.0f,  5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 0.0f,    0.0f,  1.0f,  0.0f,
-         5.0f,  5.0f,  5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 0.0f,    0.0f,  1.0f,  0.0f,
-        -5.0f,  5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 0.0f,    0.0f,  1.0f,  0.0f,
-        -5.0f,  5.0f, -5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 1.0f,    0.0f,  1.0f,  0.0f
+        -5.0f,  5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 0.0f,    0.0f,  1.0f,  0.0f
     };
 
     //se voglio afre 2 triangoli attaccati dovro usare più vertici uguali che sprecano memoria
@@ -80,17 +68,17 @@ int main() {
     //i numeri rappresentano la riga del vertice in 'vertices'
     GLuint indices[] = {
         0,1,2,      //primo triangolo
-        3,4,5,      //secondo triangolo
-        6,7,8,
-        9,10,11,
+        2,3,0,      //secondo triangolo
+        4,5,6,
+        6,7,4,
+        8,9,10,
+        10,11,8,
         12,13,14,
-        15,16,17,
-        18,19,20,
-        21,22,23,
-        24,25,26,
-        27,28,29,
-        30,31,32,
-        33,34,35
+        14,15,12,
+        16,17,18,
+        18,19,16,
+        20,21,22,
+        22,23,20
     };
 
     //coordinate per il blocco di luce
@@ -193,22 +181,26 @@ int main() {
     glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
     //usa lo shader globale
     shaderProgram.Activate();
-    //imposta le uniforme
+    //imposta le uniforme:
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));
+    //colore della luce
     glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+    //posizione del blocco di luce
     glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
     //Texture:
-    Texture slizar("slizar.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-    Texture grass("grass.png", GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
+    Texture slizar("slizar.png", GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE);
+    Texture grass("grass.png", GL_TEXTURE_2D, 1, GL_RGBA, GL_UNSIGNED_BYTE);
+    Texture grassSpec("Grass_specular.png", 2, GL_TEXTURE2, GL_RED, GL_UNSIGNED_BYTE);
     //invia la texture al shader program e all'unifoem nel fragment shader
-    slizar.texUnit(shaderProgram, "texture1", 0);
-    grass.texUnit(shaderProgram, "texture2", 1);
+    slizar.texUnit(shaderProgram, "texture0", 0);
+    grass.texUnit(shaderProgram, "texture1", 1);
+    grassSpec.texUnit(shaderProgram, "texture2", 2);
 
     //fa in modo che openGL renderizzi forme 3d con la loro profondità
     glEnable(GL_DEPTH_TEST);
     //inizializzo l'oggetto per la camera
-    Camera camera(width, height, glm::vec3(0.0f, 0.0f, 20.0f));
+    Camera camera(width, height, glm::vec3(0.0f, 2.0f, 25.0f));
 
     //loop di funzioni nel mentre che è aperta la finestra
     while (!glfwWindowShouldClose(window))
@@ -228,10 +220,9 @@ int main() {
         //esporta la matrice della camera al vertex shader del cubo
         camera.Matrix(shaderProgram, "camMatrix");
         //attiva e fa il bind delle texture così si renderizzano
-        grass.Active();
-        grass.Bind();
-        slizar.Active();
         slizar.Bind();
+        grass.Bind();
+        grassSpec.Bind();
         //bind del VAO così openGl sa di doverlo usare
         VAO1.Bind();
         //disegna il triangolo con GL_TRIANGLE e specificando quali vertici

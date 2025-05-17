@@ -90,5 +90,8 @@
     <Image Include="grass.png">
       <Filter>File di risorse\Texture</Filter>
     </Image>
+    <Image Include="Grass_specular.png">
+      <Filter>File di risorse\Texture</Filter>
+    </Image>
   </ItemGroup>
 </Project>

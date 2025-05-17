@@ -11,6 +11,7 @@ in vec3 Normal;
 //ottiene la posizione dal vertex shader
 in vec3 crntPos;
 //ottiene l'unsigned int della texture dal main
+uniform sampler2D texture0;
 uniform sampler2D texture1;
 uniform sampler2D texture2;
 //ottiene il colore della luce
@@ -33,11 +34,10 @@ void main()
 	float specularLight = 0.50f;
 	vec3 viewDirection = normalize(camPos - crntPos);
 	vec3 reflectionDirection = reflect(-lightDirection, normal);
-	float specAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0f), 8);
+	float specAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0f), 16);
 	float specular = specAmount * specularLight;
 
 	//texture imposta la texture ricevuta nelle coordinate
-	//vec4 imposta il colore del verticè in base a quello ricevuto e da opacità massima
-	FragColor = (texture(texture1, TexCoord) + texture(texture2, TexCoord) + vec4(color, 1.0f)) * lightColor * (diffuse + ambient + specular);
-
+	//FragColor imposta il colore del verticè in base a quello ricevuto e da opacità massima
+	FragColor = ((texture(texture0, TexCoord) + texture(texture1, TexCoord) + vec4(color, 1.0f)) * (diffuse + ambient) + texture(texture2, TexCoord).r * specular) * lightColor;
 }

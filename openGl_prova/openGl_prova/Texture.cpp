@@ -1,10 +1,10 @@
 #include "Texture.h"
 
-Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType)
+Texture::Texture(const char* image, GLenum texType, GLuint slot, GLenum format, GLenum pixelType)
 {
     //salva il tipo di texture nell'attributo della classe
 	type = texType;
-    this->slot = slot;
+    this->unit = slot;
     //crea l'altezza, la larghezza e canali di colori dell'immagine
     int widthImg, heightImg, numColorCh;
     //se non viene messa true l'immagine sarà al contrario perchè openGL la legge dal basso all'alto quando è salvata dall'alto al basso
@@ -15,7 +15,7 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
     //genera un oggetto texture
     glGenTextures(1, &ID);
     //assegna la texture a un texture unsigned int
-    glActiveTexture(slot);
+    glActiveTexture(GL_TEXTURE0 + slot);
     glBindTexture(texType, ID);
 
     //imposta come verrà disegnata l'immagine: GL_NEAREST=si vedono i pixel, GL_LINEAR=si generano pixel extra e si ha un effetto sfuocato
@@ -42,13 +42,9 @@ void Texture::texUnit(Shader& shader, const char* uniform, GLuint unit)
     glUniform1i(texUni, unit);
 }
 
-void Texture::Active()
-{
-    glActiveTexture(slot);
-}
-
 void Texture::Bind()
 {
+    glActiveTexture(GL_TEXTURE0 + unit);
     glBindTexture(type, ID);
 }
 
