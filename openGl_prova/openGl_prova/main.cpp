@@ -1,17 +1,4 @@
-#include <iostream>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <stb/stb_image.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-#include "shaderClass.h"
-#include "VBO.h"
-#include "VAO.h"
-#include "EBO.h"
-#include "Texture.h"
-#include "Camera.h"
+#include "Mesh.h"
 
 const unsigned int width = 900;
 const unsigned int height = 700;
@@ -30,37 +17,37 @@ int main() {
     //i punti creati verranno usati come per tracciare i lati del triangolo
     //ogni riga contiene i dati di un vertice, i dati vengono definiti dal vertex shader
     //le coordinate di openGL vanno da -1 a 1, lo 0 è il centro della finestra
-    GLfloat vertices[] = {
-        //cordinate             colori          coordinate texture  riflessi dei raggi
-        -5.0f, -5.0f, -5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 0.0f,    0.0f,  0.0f, -1.0f,
-         5.0f, -5.0f, -5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 0.0f,    0.0f,  0.0f, -1.0f,
-         5.0f,  5.0f, -5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 1.0f,    0.0f,  0.0f, -1.0f,
-        -5.0f,  5.0f, -5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 1.0f,    0.0f,  0.0f, -1.0f,
+    Vertex vertices[] = {
+        //                      cordinate               colori                          normals                 coordinate texture
+        Vertex{glm::vec3(-5.0f, -5.0f, -5.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3( 0.0f,  0.0f, -1.0f), glm::vec2(0.0f, 0.0f)},
+        Vertex{glm::vec3( 5.0f, -5.0f, -5.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3( 0.0f,  0.0f, -1.0f), glm::vec2(1.0f, 0.0f)},
+        Vertex{glm::vec3( 5.0f,  5.0f, -5.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3( 0.0f,  0.0f, -1.0f), glm::vec2(1.0f, 1.0f)},
+        Vertex{glm::vec3(-5.0f,  5.0f, -5.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3( 0.0f,  0.0f, -1.0f), glm::vec2(0.0f, 1.0f)},
 
-        -5.0f, -5.0f,  5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 0.0f,    0.0f,  0.0f,  1.0f,
-         5.0f, -5.0f,  5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 0.0f,    0.0f,  0.0f,  1.0f,
-         5.0f,  5.0f,  5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 1.0f,    0.0f,  0.0f,  1.0f,
-        -5.0f,  5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 1.0f,    0.0f,  0.0f,  1.0f,
+        Vertex{glm::vec3(-5.0f, -5.0f,  5.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3( 0.0f,  0.0f,  1.0f), glm::vec2(0.0f, 0.0f)},
+        Vertex{glm::vec3( 5.0f, -5.0f,  5.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3( 0.0f,  0.0f,  1.0f), glm::vec2(1.0f, 0.0f)},
+        Vertex{glm::vec3( 5.0f,  5.0f,  5.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3( 0.0f,  0.0f,  1.0f), glm::vec2(1.0f, 1.0f)},
+        Vertex{glm::vec3(-5.0f,  5.0f,  5.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3( 0.0f,  0.0f,  1.0f), glm::vec2(0.0f, 1.0f)},
 
-        -5.0f,  5.0f,  5.0f,  1.0f, 0.0f, 0.0f,     1.0f, 0.0f,   -1.0f,  0.0f,  0.0f,
-        -5.0f,  5.0f, -5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 1.0f,   -1.0f,  0.0f,  0.0f,
-        -5.0f, -5.0f, -5.0f,  0.0f, 0.0f, 1.0f,     0.0f, 1.0f,   -1.0f,  0.0f,  0.0f,
-        -5.0f, -5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 0.0f,   -1.0f,  0.0f,  0.0f,
+        Vertex{glm::vec3(-5.0f,  5.0f,  5.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec2(1.0f, 0.0f)},
+        Vertex{glm::vec3(-5.0f,  5.0f, -5.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec2(1.0f, 1.0f)},
+        Vertex{glm::vec3(-5.0f, -5.0f, -5.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec2(0.0f, 1.0f)},
+        Vertex{glm::vec3(-5.0f, -5.0f,  5.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec2(0.0f, 0.0f)},
 
-         5.0f,  5.0f,  5.0f,  1.0f, 0.0f, 0.0f,     1.0f, 0.0f,    1.0f,  0.0f,  0.0f,
-         5.0f,  5.0f, -5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 1.0f,    1.0f,  0.0f,  0.0f,
-         5.0f, -5.0f, -5.0f,  0.0f, 0.0f, 1.0f,     0.0f, 1.0f,    1.0f,  0.0f,  0.0f,
-         5.0f, -5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 0.0f,    1.0f,  0.0f,  0.0f,
+        Vertex{glm::vec3( 5.0f,  5.0f,  5.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3( 1.0f,  0.0f,  0.0f), glm::vec2(1.0f, 0.0f)},
+        Vertex{glm::vec3( 5.0f,  5.0f, -5.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3( 1.0f,  0.0f,  0.0f), glm::vec2(1.0f, 1.0f)},
+        Vertex{glm::vec3( 5.0f, -5.0f, -5.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3( 1.0f,  0.0f,  0.0f), glm::vec2(0.0f, 1.0f)},
+        Vertex{glm::vec3( 5.0f, -5.0f,  5.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3( 1.0f,  0.0f,  0.0f), glm::vec2(0.0f, 0.0f)},
 
-        -5.0f, -5.0f, -5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 1.0f,    0.0f, -1.0f,  0.0f,
-         5.0f, -5.0f, -5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 1.0f,    0.0f, -1.0f,  0.0f,
-         5.0f, -5.0f,  5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 0.0f,    0.0f, -1.0f,  0.0f,
-        -5.0f, -5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 0.0f,    0.0f, -1.0f,  0.0f,
+        Vertex{glm::vec3(-5.0f, -5.0f, -5.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3( 0.0f, -1.0f,  0.0f), glm::vec2(0.0f, 1.0f)},
+        Vertex{glm::vec3( 5.0f, -5.0f, -5.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3( 0.0f, -1.0f,  0.0f), glm::vec2(1.0f, 1.0f)},
+        Vertex{glm::vec3( 5.0f, -5.0f,  5.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3( 0.0f, -1.0f,  0.0f), glm::vec2(1.0f, 0.0f)},
+        Vertex{glm::vec3(-5.0f, -5.0f,  5.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3( 0.0f, -1.0f,  0.0f), glm::vec2(0.0f, 0.0f)},
 
-        -5.0f,  5.0f, -5.0f,  1.0f, 0.0f, 0.0f,     0.0f, 1.0f,    0.0f,  1.0f,  0.0f,
-         5.0f,  5.0f, -5.0f,  0.0f, 1.0f, 0.0f,     1.0f, 1.0f,    0.0f,  1.0f,  0.0f,
-         5.0f,  5.0f,  5.0f,  0.0f, 0.0f, 1.0f,     1.0f, 0.0f,    0.0f,  1.0f,  0.0f,
-        -5.0f,  5.0f,  5.0f,  1.0f, 1.0f, 1.0f,     0.0f, 0.0f,    0.0f,  1.0f,  0.0f
+        Vertex{glm::vec3(-5.0f,  5.0f, -5.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f,  1.0f,  0.0f), glm::vec2(0.0f, 1.0f)},
+        Vertex{glm::vec3( 5.0f,  5.0f, -5.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f,  1.0f,  0.0f), glm::vec2(1.0f, 1.0f)},
+        Vertex{glm::vec3( 5.0f,  5.0f,  5.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f,  1.0f,  0.0f), glm::vec2(1.0f, 0.0f)},
+        Vertex{glm::vec3(-5.0f,  5.0f,  5.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f,  1.0f,  0.0f), glm::vec2(0.0f, 0.0f)}
     };
 
     //se voglio afre 2 triangoli attaccati dovro usare più vertici uguali che sprecano memoria
@@ -82,15 +69,15 @@ int main() {
     };
 
     //coordinate per il blocco di luce
-    GLfloat lightVertices[] = {
-        -1.0f, -1.0f,  1.0f,
-        -1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f,  1.0f,
-        -1.0f,  1.0f,  1.0f,
-        -1.0f,  1.0f, -1.0f,
-         1.0f,  1.0f, -1.0f,
-         1.0f,  1.0f,  1.0f
+    Vertex lightVertices[] = {
+        Vertex{glm::vec3(-1.0f, -1.0f,  1.0f)},
+        Vertex{glm::vec3(-1.0f, -1.0f, -1.0f)},
+        Vertex{glm::vec3( 1.0f, -1.0f, -1.0f)},
+        Vertex{glm::vec3( 1.0f, -1.0f,  1.0f)},
+        Vertex{glm::vec3(-1.0f,  1.0f,  1.0f)},
+        Vertex{glm::vec3(-1.0f,  1.0f, -1.0f)},
+        Vertex{glm::vec3( 1.0f,  1.0f, -1.0f)},
+        Vertex{glm::vec3( 1.0f,  1.0f,  1.0f)}
     };
     //indici per il blocco di luce
     GLuint lightIndices[] = {
@@ -131,43 +118,34 @@ int main() {
         return -1;
     }
 
+    Texture textures[]{
+        Texture("slizar.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
+        Texture("grass.png", "diffuse", 1, GL_RGBA, GL_UNSIGNED_BYTE),
+        Texture("Grass_specular.png","specular",2,GL_RED,GL_UNSIGNED_BYTE)
+    };
+
     //crea un shader program con vertex shader e fragment shader
     Shader shaderProgram("default.vert", "default.frag");
-
-    //genera un vertex array object e fa il bind
-    VAO VAO1;
-    VAO1.Bind();
-    //genera vertex buffer object a cui dare i vertici
-    VBO VBO1(vertices, sizeof(vertices));
-    //genera element buffer object a cui dare gli indici
-    EBO EBO1(indices, sizeof(indices));
-
-    //collega gli attributi del VBO con VAO
-    VAO1.linkAttrib(VBO1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);//posizione
-    VAO1.linkAttrib(VBO1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));//colori
-    VAO1.linkAttrib(VBO1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));//texture
-    VAO1.linkAttrib(VBO1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));//riflessi
-    //unbind degli oggetti per evitare di cambiare valore per sbaglio
-    VAO1.Unbind();
-    VBO1.Unbind();
-    EBO1.Unbind();
+    //dati per creare il mesh
+    std::vector <Vertex> verts(vertices, vertices + sizeof(vertices) / sizeof(Vertex));
+    std::vector <GLuint> ind(indices, indices + sizeof(indices) / sizeof(GLuint));
+    std::vector <Texture> tex(textures, textures + sizeof(textures) / sizeof(Texture));
+    //crea il mesh del cubo
+    Mesh cubo(verts, ind, tex);
 
     //shadre per il blocco di luce
     Shader lightShader("light.vert", "light.frag");
     //stesso procedimento:
-    VAO lightVAO;
-    lightVAO.Bind();
-    VBO lightVBO(lightVertices, sizeof(lightVertices));
-    EBO lightEBO(lightIndices, sizeof(lightIndices));
-    lightVAO.linkAttrib(lightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);//posizione blocco
-    lightVAO.Unbind();
-    lightVBO.Unbind();
-    lightEBO.Unbind();
+    //dati per crare il mesh
+    std::vector <Vertex> lightVerts(lightVertices, lightVertices + sizeof(lightVertices) / sizeof(Vertex));
+    std::vector <GLuint> lightInd(lightIndices, lightIndices + sizeof(lightIndices) / sizeof(GLuint));
+    //mesh del blocco di luce
+    Mesh light(lightVerts, lightInd, tex);
 
     //colore della luce
     glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     //posizione del blocco di luce
-    glm::vec3 lightPos = glm::vec3(8.0f, 7.0f, 9.0f);
+    glm::vec3 lightPos = glm::vec3(2.5f, 8.0f, 10.0f);
     glm::mat4 lightModel = glm::mat4(1.0f);
     lightModel = glm::translate(lightModel, lightPos);
     //posizione del cubo
@@ -188,15 +166,6 @@ int main() {
     //posizione del blocco di luce
     glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
-    //Texture:
-    Texture slizar("slizar.png", GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE);
-    Texture grass("grass.png", GL_TEXTURE_2D, 1, GL_RGBA, GL_UNSIGNED_BYTE);
-    Texture grassSpec("Grass_specular.png", 2, GL_TEXTURE2, GL_RED, GL_UNSIGNED_BYTE);
-    //invia la texture al shader program e all'unifoem nel fragment shader
-    slizar.texUnit(shaderProgram, "texture0", 0);
-    grass.texUnit(shaderProgram, "texture1", 1);
-    grassSpec.texUnit(shaderProgram, "texture2", 2);
-
     //fa in modo che openGL renderizzi forme 3d con la loro profondità
     glEnable(GL_DEPTH_TEST);
     //inizializzo l'oggetto per la camera
@@ -213,28 +182,9 @@ int main() {
         camera.Input(window);
         //aggiorna e esporta la matrice della camera al vertex shader
         camera.updateMatrix(50.0f, 0.1f, 200.0f);
-        //dì a openGL quale shader program usare
-        shaderProgram.Activate();
-        //esporta la posizione della camera al fragment shader per l'illuminazione
-        glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-        //esporta la matrice della camera al vertex shader del cubo
-        camera.Matrix(shaderProgram, "camMatrix");
-        //attiva e fa il bind delle texture così si renderizzano
-        slizar.Bind();
-        grass.Bind();
-        grassSpec.Bind();
-        //bind del VAO così openGl sa di doverlo usare
-        VAO1.Bind();
-        //disegna il triangolo con GL_TRIANGLE e specificando quali vertici
-        glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-        //ora usiamo il shader program della luce
-        lightShader.Activate();
-        //esporta la matrice della camera al vertex shader della luce
-        camera.Matrix(lightShader, "camMatrix");
-        //Bind del VAO della luce così openGl sa di doverlo usare
-        lightVAO.Bind();
-        //disegna il cubo che emette luce
-        glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+        //disegna i mesh
+        cubo.Draw(shaderProgram, camera);
+        light.Draw(lightShader, camera);
         
         //cambia i buffer
         glfwSwapBuffers(window);
@@ -243,12 +193,8 @@ int main() {
     }
 
     //cancella tutti gli oggetti creati
-    VAO1.Delete();
-    VBO1.Delete();
-    EBO1.Delete();
-    slizar.Delete();
-    grass.Delete();
     shaderProgram.Delete();
+    lightShader.Delete();
     //distrugge il programma
     glfwDestroyWindow(window);
     glfwTerminate();

@@ -2,6 +2,7 @@
 
 std::string get_file_contents(const char* filename)
 {
+    //legge riga per riga dai vertex e fragment shader
 	std::ifstream in(filename, std::ios::binary);
 	if (in) {
 		std::string contents;
